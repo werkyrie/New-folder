@@ -68,7 +68,6 @@ export default function LoginPage() {
   useEffect(() => {
     if (!mounted || typeof window === "undefined") return
 
-    // Simple mouse move effect for the card
     const card = document.querySelector(".login-card")
     if (card) {
       const handleMouseMove = (e: MouseEvent) => {
@@ -78,7 +77,7 @@ export default function LoginPage() {
 
         // Subtle rotation effect
         const cardElement = card as HTMLElement
-        cardElement.style.transform = `perspective(1000px) rotateY(${x * 5}deg) rotateX(${y * -5}deg)`
+        cardElement.style.transform = `perspective(1000px) rotateY(${x * 2}deg) rotateX(${y * -2}deg)`
       }
 
       const handleMouseLeave = () => {
@@ -86,8 +85,10 @@ export default function LoginPage() {
         cardElement.style.transform = "perspective(1000px) rotateY(0deg) rotateX(0deg)"
       }
 
-      card.addEventListener("mousemove", handleMouseMove)
-      card.addEventListener("mouseleave", handleMouseLeave)
+      setTimeout(() => {
+        card.addEventListener("mousemove", handleMouseMove)
+        card.addEventListener("mouseleave", handleMouseLeave)
+      }, 100)
 
       return () => {
         card.removeEventListener("mousemove", handleMouseMove)
@@ -171,7 +172,11 @@ export default function LoginPage() {
   }
 
   if (!mounted) {
-    return null
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-600"></div>
+      </div>
+    )
   }
 
   return (

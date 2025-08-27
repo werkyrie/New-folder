@@ -58,7 +58,7 @@ export default function Home() {
       console.log("[v0] Redirecting to login - not authenticated")
       setLoadingScreenCompleted(false)
       loadingScreenInitialized.current = false
-      router.push("/login")
+      router.replace("/login")
       return
     }
   }, [isAuthenticated, loading, router])
@@ -92,8 +92,12 @@ export default function Home() {
 
   if (!isAuthenticated) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-4"></div>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Redirecting to login...</p>
+        <a href="/login" className="text-blue-600 hover:text-blue-800 text-sm underline">
+          Click here if not redirected automatically
+        </a>
       </div>
     )
   }
